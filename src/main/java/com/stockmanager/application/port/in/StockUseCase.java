@@ -2,7 +2,6 @@ package com.stockmanager.application.port.in;
 
 import com.stockmanager.application.dto.ProductDTO;
 import com.stockmanager.domain.enums.MovementType;
-import com.stockmanager.domain.model.Stock;
 
 public interface StockUseCase {
     void addProduct(ProductDTO productDTO);
@@ -11,5 +10,5 @@ public interface StockUseCase {
 
     Integer getAvailableQuantity(Long productId);
 
-    void validateStockMovement(Stock stock, MovementType movementType);
+    void validateStockMovement(Long productId, MovementType movementType);
 }

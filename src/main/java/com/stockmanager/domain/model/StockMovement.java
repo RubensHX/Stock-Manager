@@ -2,13 +2,12 @@ package com.stockmanager.domain.model;
 
 import com.stockmanager.domain.enums.MovementType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "stock_movement")
@@ -37,5 +36,17 @@ public class StockMovement {
         this.movementDate = new Date();
         this.quantity = quantity;
         this.movementType = movementType;
+    }
+
+    @Override
+    public String toString() {
+        return "StockMovement{" +
+                "id=" + id +
+                ", stock=" + stock +
+                ", movementDate=" + movementDate +
+                ", movementType=" + movementType +
+                ", quantity=" + quantity +
+                ", observation='" + observation + '\'' +
+                '}';
     }
 }

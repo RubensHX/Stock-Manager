@@ -60,7 +60,7 @@ public class StockService implements ProductUseCase, StockUseCase {
     public void moveStock(Long productId, Integer quantity, MovementType movementType) {
         Stock stock = stockRepository.findByProductId(productId).orElseThrow(() -> new NotFoundException(String.format("Stock not found for product %d", productId)));
 
-        validateStockMovement(stock, movementType);
+        validateStockMovement(productId, movementType);
 
         Integer newQuantity = movementType.equals(MovementType.IN)
                 ? stock.getAvailableQuantity() + quantity
@@ -82,8 +82,8 @@ public class StockService implements ProductUseCase, StockUseCase {
     }
 
     @Override
-    public void validateStockMovement(Stock stock, MovementType movementType) {
-        if (getAvailableQuantity(stock.getProduct().getId()) == 0 && movementType.equals(MovementType.OUT)) {
+    public void validateStockMovement(Long productId, MovementType movementType) {
+        if (getAvailableQuantity(productId) == 0 && movementType.equals(MovementType.OUT)) {
             throw new UnavailableMovement("The product is not available");
         }
     }
